@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using ColossalFramework.UI;
 using PrecisionEngineering.Data;
-using PrecisionEngineering.Detour;
+using PrecisionEngineering.Patches;
 using PrecisionEngineering.Utilities;
 using UnityEngine;
 
@@ -55,14 +55,6 @@ namespace PrecisionEngineering.UI
             }
 
             var txt = new StringBuilder();
-
-            /*txt.AppendLine(string.Format("ToolManager.instance.m_properties.HasInputFocus: {0}",
-				ToolManager.instance.m_properties.HasInputFocus));
-
-			txt.AppendLine(string.Format("LCtrl: {0}, RCtrl: {1}, LShift: {2}, RShift: {3},\n LAlt: {4}, RAlt: {5}, AltGR: {6}",
-				Input.GetKey(KeyCode.LeftControl), Input.GetKey(KeyCode.RightControl), Input.GetKey(KeyCode.LeftShift),
-				Input.GetKey(KeyCode.RightShift), Input.GetKey(KeyCode.LeftAlt), Input.GetKey(KeyCode.RightAlt),
-				Input.GetKey(KeyCode.AltGr)));*/
 
             txt.AppendLine(string.Format("SnapController:\n{0}", SnapController.DebugPrint));
             SnapController.DebugPrint = "";

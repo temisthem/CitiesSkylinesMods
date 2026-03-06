@@ -17,7 +17,6 @@ namespace PrecisionEngineering.UI
 
             var vector3_1 = Camera.main.WorldToScreenPoint(worldPos)/uiView.inputScale;
             var vector3_3 = uiView.ScreenPointToGUI(vector3_1) - new Vector2(size.x*0.5f, size.y*0.5f);
-                // + new Vector2(vector3_2.x, vector3_2.y);
 
             relativePosition = vector3_3;
             textScale = GetFontScale();
@@ -41,8 +40,6 @@ namespace PrecisionEngineering.UI
             processMarkup = true;
 
             isInteractive = false;
-
-            //<color #87d3ff>Construction cost: 520</color>
         }
 
         private static float GetFontScale()

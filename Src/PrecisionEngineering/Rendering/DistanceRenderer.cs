@@ -7,6 +7,8 @@ namespace PrecisionEngineering.Rendering
     internal static class DistanceRenderer
     {
         public const float Size = 1f;
+        private const float DashSize = 3f;
+        private const float HeightPadding = 20f;
 
         public static Vector3 GetLabelWorldPosition(DistanceMeasurement distance)
         {
@@ -27,9 +29,9 @@ namespace PrecisionEngineering.Rendering
 
             renderManager.OverlayEffect.DrawSegment(cameraInfo,
                 distance.Flags == MeasurementFlags.Primary ? Settings.PrimaryColor : Settings.SecondaryColor,
-                new Segment3(distance.StartPosition, distance.EndPosition), Size, 3f,
-                minHeight - 20f,
-                maxHeight + 20f, true, true);
+                new Segment3(distance.StartPosition, distance.EndPosition), Size, DashSize,
+                minHeight - HeightPadding,
+                maxHeight + HeightPadding, true, true);
         }
     }
 }

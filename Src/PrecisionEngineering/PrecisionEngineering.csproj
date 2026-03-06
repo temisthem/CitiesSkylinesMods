@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,28 +28,27 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>P:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ColossalManaged">
-      <HintPath>P:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICities">
-      <HintPath>P:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>P:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>P:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -64,18 +62,18 @@
     <Compile Include="Data\NetToolLocator.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Data\Measurement.cs" />
-    <Compile Include="Detour\AltKeyFix.cs" />
-    <Compile Include="Detour\FakeRoadAI.cs" />
+    <Compile Include="Patches\AltKeyFix.cs" />
+    <Compile Include="Patches\NetAIPatches.cs" />
     <Compile Include="ModSettings.cs" />
     <Compile Include="Rendering\DistanceRenderer.cs" />
     <Compile Include="Rendering\GuideLineRenderer.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Detour\SnapController.cs" />
+    <Compile Include="Patches\SnapController.cs" />
     <Compile Include="UI\MeasurementLabel.cs" />
     <Compile Include="Utilities\BezierUtil.cs" />
     <Compile Include="Utilities\NetNodeUtility.cs" />
     <Compile Include="Utilities\NetUtil.cs" />
-    <Compile Include="Detour\RedirectionHelper.cs" />
+    <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Utilities\StringUtil.cs" />
     <Compile Include="Utilities\Util.cs" />
     <Compile Include="Utilities\Vector3Extensions.cs" />
@@ -88,6 +86,9 @@
     <Compile Include="UI\PrecisionUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mod.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CitiesHarmony.API" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using ColossalFramework.UI;
 using PrecisionEngineering.Data;
-using PrecisionEngineering.Detour;
+using PrecisionEngineering.Patches;
 using PrecisionEngineering.Rendering;
 using PrecisionEngineering.UI;
 using PrecisionEngineering.Utilities;
@@ -97,18 +97,11 @@ namespace PrecisionEngineering
         {
             if (!IsEnabled)
             {
-                //Debug.LogWarning("[SimulationStepImpl] !IsEnabled");
                 return;
             }
 
             base.SimulationStepImpl(subStep);
 
-            // Toggle with shift
-            /*_secondaryDetailEnabled = (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-				? !_secondaryDetailEnabled
-				: _secondaryDetailEnabled;*/
-
-            // Activate with shift
             _secondaryDetailEnabled = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
             _advancedSnappingEnabled = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
@@ -132,7 +125,6 @@ namespace PrecisionEngineering
 
             if (!IsEnabled)
             {
-                //Debug.LogWarning("[EndOverlayImpl] !IsEnabled");
                 return;
             }
 
@@ -184,9 +176,10 @@ namespace PrecisionEngineering
                 return;
             }
 
-            if (m is AngleMeasurement)
+            var am = m as AngleMeasurement;
+
+            if (am != null)
             {
-                var am = m as AngleMeasurement;
 
                 if (am.AngleSize < 1f)
                 {
@@ -202,9 +195,10 @@ namespace PrecisionEngineering
                 return;
             }
 
-            if (m is DistanceMeasurement)
+            var dm = m as DistanceMeasurement;
+
+            if (dm != null)
             {
-                var dm = m as DistanceMeasurement;
 
                 if (Mathf.Abs(dm.Length) < Settings.MinimumDistanceMeasure)
                 {

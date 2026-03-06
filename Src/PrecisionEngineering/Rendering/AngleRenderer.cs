@@ -6,14 +6,19 @@ namespace PrecisionEngineering.Rendering
 {
     internal static class AngleRenderer
     {
+        private const float BlueprintAngleDistance = 10f;
+        private const float DefaultAngleDistance = 15f;
+        private const float ArcLineWidth = 0.7f;
+        private const float HeightPadding = 20f;
+
         public static float GetAngleDistance(MeasurementFlags flags)
         {
             if ((flags & MeasurementFlags.Blueprint) != 0)
             {
-                return 10f;
+                return BlueprintAngleDistance;
             }
 
-            return 15f;
+            return DefaultAngleDistance;
         }
 
         public static Color GetAngleColor(MeasurementFlags flags)
@@ -58,12 +63,9 @@ namespace PrecisionEngineering.Rendering
 
             for (var i = 0; i < arcs.Count; i++)
             {
-                var isFirst = i == 0;
-                var isLast = i == arcs.Count - 1;
-
-                renderManager.OverlayEffect.DrawBezier(cameraInfo, GetAngleColor(angle.Flags), arcs[i], .7f, 0f, 0f,
-                    angle.Position.y - 20f,
-                    angle.Position.y + 20f, false, true);
+                renderManager.OverlayEffect.DrawBezier(cameraInfo, GetAngleColor(angle.Flags), arcs[i], ArcLineWidth, 0f, 0f,
+                    angle.Position.y - HeightPadding,
+                    angle.Position.y + HeightPadding, false, true);
             }
         }
     }

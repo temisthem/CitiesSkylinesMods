@@ -79,8 +79,6 @@ namespace PrecisionEngineering.Data.Calculations
                 return;
             }
 
-            //var lastNode = netTool.NodePositions[netTool.NodePositions.m_size-1];
-
             CalculateAngles(destNodeId, -controlPoint.m_direction, measurements);
         }
 

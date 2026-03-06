@@ -1,7 +1,7 @@
-﻿using System;
+using System;
+using CitiesHarmony.API;
 using ICities;
-using PrecisionEngineering.Detour;
-using UE = UnityEngine;
+using PrecisionEngineering.Patches;
 
 namespace PrecisionEngineering
 {
@@ -22,9 +22,10 @@ namespace PrecisionEngineering
 
                 Manager.OnLevelLoaded();
 
-                FakeRoadAI.Deploy();
-                SnapController.Deploy();
-                AltKeyFix.Deploy();
+                if (HarmonyHelper.IsHarmonyInstalled)
+                {
+                    Patcher.PatchAll();
+                }
             }
             catch (Exception e)
             {
@@ -39,9 +40,10 @@ namespace PrecisionEngineering
             {
                 Debug.Log("OnLevelUnloading");
 
-                FakeRoadAI.Revert();
-                SnapController.Revert();
-                AltKeyFix.Revert();
+                if (HarmonyHelper.IsHarmonyInstalled)
+                {
+                    Patcher.UnpatchAll();
+                }
 
                 Manager.OnLevelUnloaded();
             }

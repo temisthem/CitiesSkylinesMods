@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using PrecisionEngineering.Data.Calculations;
-using PrecisionEngineering.Detour;
+using PrecisionEngineering.Patches;
 using PrecisionEngineering.Utilities;
 using UnityEngine;
 

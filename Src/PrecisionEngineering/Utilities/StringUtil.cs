@@ -67,9 +67,9 @@ namespace PrecisionEngineering.Utilities
 
             float yardsExact = meterDistance * 1.09361f;
             int yards = Mathf.FloorToInt(yardsExact);
-            float remainder = yards - yardsExact;
+            float remainder = yardsExact - yards;
 
-            int feet = Mathf.FloorToInt(remainder / 3f);
+            int feet = Mathf.FloorToInt(remainder * 3f);
 
             if (feet > 0)
             {

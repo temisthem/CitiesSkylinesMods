@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CitiesHarmony.API;
 using ICities;
 
 namespace PrecisionEngineering
@@ -7,7 +7,7 @@ namespace PrecisionEngineering
     {
         public string Name
         {
-            get { return "Precision Engineering"; }
+            get { return "Precision Engineering (Harmony)"; }
         }
 
         public string Description
@@ -19,12 +19,25 @@ namespace PrecisionEngineering
             }
         }
 
+        public void OnEnabled()
+        {
+            HarmonyHelper.EnsureHarmonyInstalled();
+        }
+
+        public void OnDisabled()
+        {
+            if (HarmonyHelper.IsHarmonyInstalled)
+            {
+                Patches.Patcher.UnpatchAll();
+            }
+        }
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             var group = helper.AddGroup("UI");
             group.AddDropdown("Font Size", new [] {"Normal", "Large", "X-Large"}, ModSettings.FontSize,
-                OnFontSizeChanged); 
-            
+                OnFontSizeChanged);
+
             group.AddDropdown("Measurement Unit", new [] {"Metric", "Imperial"}, (int)ModSettings.Unit,
                 OnMeasurementUnitChanged);
         }

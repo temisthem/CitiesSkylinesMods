@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ColossalFramework.Math;
-using PrecisionEngineering.Detour;
+using PrecisionEngineering.Patches;
 using PrecisionEngineering.Utilities;
 using UnityEngine;
 
@@ -139,8 +139,6 @@ namespace PrecisionEngineering.Data.Calculations
 
         public static bool IsDuplicate(IList<GuideLine> existingLines, GuideLine newLine, out int index)
         {
-            index = -1;
-            return false;
             var l = existingLines.Count;
 
             // Discard if an existing line has the same direction and origin
