@@ -1,40 +1,74 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using ColossalFramework;
 using HarmonyLib;
+using UnityEngine;
 
 namespace PedestrianStreetServices.Patches
 {
     /// <summary>
     /// Expands the bollard entry/exit point configuration to recognize service
-    /// vehicles in addition to emergency vehicles. Without this, bollards would
-    /// have no enter/exit points for service vehicle lanes and the traffic light
-    /// cycle would not apply to them.
+    /// vehicles in addition to emergency vehicles, but only for nodes that are
+    /// NOT inside a pedestrian zone district. Nodes inside a zone retain vanilla
+    /// behavior so that the service point system handles deliveries.
     ///
     /// The original code masks lane vehicle categories with VehicleCategory.Emergency.
-    /// We replace that constant with an expanded mask that includes service vehicles.
+    /// We replace that constant load with a call to a helper that returns an expanded
+    /// mask when outside a zone, or the original Emergency mask when inside one.
     /// </summary>
     [HarmonyPatch(typeof(PedestrianZoneRoadAI), nameof(PedestrianZoneRoadAI.UpdateBollards))]
     internal static class PedestrianZoneRoadAI_UpdateBollards
     {
         private static readonly long OriginalMask = (long)VehicleInfo.VehicleCategory.Emergency;
 
-        private static readonly long ExpandedMask = (long)(
-            VehicleInfo.VehicleCategory.Emergency | ServiceVehicleCategories.Combined);
+        /// <summary>
+        /// Returns the appropriate bollard vehicle category mask for the given node.
+        /// Called from transpiled IL in place of the original Emergency constant.
+        /// </summary>
+        public static long GetBollardMask(ushort nodeID)
+        {
+            var position = Singleton<NetManager>.instance.m_nodes.m_buffer[nodeID].m_position;
+            var districtManager = Singleton<DistrictManager>.instance;
+            var park = districtManager.GetPark(position);
+
+            if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
+                return (long)VehicleInfo.VehicleCategory.Emergency;
+
+            return (long)(VehicleInfo.VehicleCategory.Emergency | ServiceVehicleCategories.Combined);
+        }
 
         [HarmonyTranspiler]
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
+            var getBollardMask = typeof(PedestrianZoneRoadAI_UpdateBollards).GetMethod(
+                nameof(GetBollardMask), BindingFlags.Public | BindingFlags.Static);
+
+            var patched = false;
+
             foreach (var instruction in instructions)
             {
-                if (instruction.opcode == OpCodes.Ldc_I8 && instruction.operand is long value && value == OriginalMask)
+                if (!patched && instruction.opcode == OpCodes.Ldc_I8
+                    && instruction.operand is long value && value == OriginalMask)
                 {
-                    yield return new CodeInstruction(OpCodes.Ldc_I8, ExpandedMask);
+                    // Replace: ldc.i8 Emergency
+                    // With:    ldarg.0 (nodeID) / call GetBollardMask
+                    // UpdateBollards signature: static void UpdateBollards(ushort nodeID, ref NetNode nodeData)
+                    // So arg 0 = nodeID
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Call, getBollardMask);
+                    patched = true;
                 }
                 else
                 {
                     yield return instruction;
                 }
+            }
+
+            if (!patched)
+            {
+                Debug.LogWarning(
+                    "[PedestrianStreetServices] Could not find Emergency mask in PedestrianZoneRoadAI.UpdateBollards.");
             }
         }
     }

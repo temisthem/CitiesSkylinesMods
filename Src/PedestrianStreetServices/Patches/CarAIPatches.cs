@@ -48,15 +48,26 @@ namespace PedestrianStreetServices.Patches
         /// <summary>
         /// Returns true if the vehicle should be allowed to force-open a bollard.
         /// Called from the transpiled IL in place of the original Emergency2 flag check.
+        /// Service vehicles are only allowed through bollards outside of pedestrian zones.
         /// </summary>
         public static bool ShouldPassBollard(Vehicle.Flags flags, ushort vehicleID)
         {
             if ((flags & Vehicle.Flags.Emergency2) != 0)
                 return true;
 
-            var info = Singleton<VehicleManager>.instance.m_vehicles.m_buffer[vehicleID].Info;
-            return info != null
-                && (info.vehicleCategory & ServiceVehicleCategories.Combined) != VehicleInfo.VehicleCategory.None;
+            var vehicle = Singleton<VehicleManager>.instance.m_vehicles.m_buffer[vehicleID];
+            var info = vehicle.Info;
+            if (info == null || (info.vehicleCategory & ServiceVehicleCategories.Combined) == VehicleInfo.VehicleCategory.None)
+                return false;
+
+            // Don't force-open bollards at pedestrian zone boundaries — inside a zone
+            // the service point system handles deliveries via the vanilla mechanism.
+            var districtManager = Singleton<DistrictManager>.instance;
+            var park = districtManager.GetPark(vehicle.GetLastFramePosition());
+            if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
+                return false;
+
+            return true;
         }
 
         [HarmonyTranspiler]

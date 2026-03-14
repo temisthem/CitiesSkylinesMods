@@ -58,6 +58,7 @@
     <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Patches\PedestrianZoneRoadAIPatches.cs" />
     <Compile Include="Patches\ServicePointAIPatches.cs" />
+    <Compile Include="Patches\TransferManagerPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

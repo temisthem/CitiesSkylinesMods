@@ -9,11 +9,11 @@ namespace PedestrianStreetServices.Patches
     /// This forces the game to dispatch service vehicles directly to the
     /// building instead of routing through the service point intermediary.
     /// </summary>
-    [HarmonyPatch(typeof(CommonBuildingAI), nameof(CommonBuildingAI.GetUseServicePoint))]
-    internal static class CommonBuildingAI_GetUseServicePoint
+    [HarmonyPatch(typeof(BuildingAI), nameof(BuildingAI.GetUseServicePoint))]
+    internal static class BuildingAI_GetUseServicePoint
     {
         [HarmonyPostfix]
-        static void Postfix(ushort buildingID, ref Building data, ref bool __result)
+        static void Postfix(ushort buildingAI, ref Building data, ref bool __result)
         {
             if (!__result)
                 return;
@@ -21,13 +21,9 @@ namespace PedestrianStreetServices.Patches
             var districtManager = Singleton<DistrictManager>.instance;
             var park = districtManager.GetPark(data.m_position);
 
-            // If the building is inside a pedestrian zone district, leave it alone.
-            // The service point system will handle it as intended.
             if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
                 return;
 
-            // Building is NOT in a pedestrian zone — bypass the service point proxy
-            // so that service vehicles are dispatched directly.
             __result = false;
         }
     }
