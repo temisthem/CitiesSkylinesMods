@@ -8,6 +8,8 @@ namespace PedestrianStreetServices.Patches
     /// pedestrian streets but NOT inside an actual pedestrian zone district.
     /// This forces the game to dispatch service vehicles directly to the
     /// building instead of routing through the service point intermediary.
+    /// When overriding the result, clears stale service-point problem
+    /// notifications that vanilla would otherwise never remove.
     /// </summary>
     [HarmonyPatch(typeof(BuildingAI), nameof(BuildingAI.GetUseServicePoint))]
     internal static class BuildingAI_GetUseServicePoint
@@ -25,6 +27,10 @@ namespace PedestrianStreetServices.Patches
                 return;
 
             __result = false;
+
+            data.m_problems = Notification.RemoveProblems(data.m_problems,
+                Notification.Problem2.NoCargoServicePoint
+                | Notification.Problem2.NoGarbageServicePoint);
         }
     }
 }
