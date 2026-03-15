@@ -6,12 +6,6 @@ namespace SometimesPedestrianStreets
 {
     public static class PrefabModifier
     {
-        private static readonly VehicleInfo.VehicleCategoryPart1 ServiceCategoryPart1 =
-            ServiceVehicleCategories.Part1;
-
-        private static readonly VehicleInfo.VehicleCategoryPart2 ServiceCategoryPart2 =
-            ServiceVehicleCategories.Part2;
-
         private struct OriginalLaneData
         {
             public VehicleInfo.VehicleCategoryPart1 Part1;
@@ -58,8 +52,8 @@ namespace SometimesPedestrianStreets
                     if ((lane.m_vehicleType & VehicleInfo.VehicleType.Car) == VehicleInfo.VehicleType.None)
                         continue;
 
-                    lane.m_vehicleCategoryPart1 |= ServiceCategoryPart1;
-                    lane.m_vehicleCategoryPart2 |= ServiceCategoryPart2;
+                    lane.m_vehicleCategoryPart1 |= ServiceVehicleCategories.Part1;
+                    lane.m_vehicleCategoryPart2 |= ServiceVehicleCategories.Part2;
                     prefabModified = true;
                 }
 
