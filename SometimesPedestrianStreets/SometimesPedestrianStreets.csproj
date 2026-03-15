@@ -52,9 +52,10 @@
     <Compile Include="LoadingExtension.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="PrefabModifier.cs" />
+    <Compile Include="DistrictUtils.cs" />
     <Compile Include="ServiceVehicleCategories.cs" />
     <Compile Include="Patches\CarAIPatches.cs" />
-    <Compile Include="Patches\CommonBuildingAIPatches.cs" />
+    <Compile Include="Patches\BuildingAIPatches.cs" />
     <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Patches\PedestrianZoneRoadAIPatches.cs" />
     <Compile Include="Patches\ServicePointAIPatches.cs" />
