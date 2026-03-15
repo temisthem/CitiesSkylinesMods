@@ -1,7 +1,6 @@
 using System.Reflection;
 using ColossalFramework;
 using HarmonyLib;
-using UnityEngine;
 
 namespace PedestrianStreetServices.Patches
 {
@@ -154,47 +153,6 @@ namespace PedestrianStreetServices.Patches
                         insertPos++;
                     }
                 }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Logs when a cargo truck targets a service point building.
-    /// Helps diagnose whether cargo delivery failures to pedestrian zones
-    /// are caused by this mod (pathfinding failures) or other issues.
-    /// </summary>
-    [HarmonyPatch(typeof(CargoTruckAI), nameof(CargoTruckAI.SetTarget))]
-    internal static class CargoTruckAI_SetTarget_Diag
-    {
-        private static int _okCount;
-
-        [HarmonyPostfix]
-        static void Postfix(ushort vehicleID, ref Vehicle data, ushort targetBuilding)
-        {
-            if (targetBuilding == 0)
-                return;
-
-            var bldgBuf = Singleton<BuildingManager>.instance.m_buildings.m_buffer;
-            if (!(bldgBuf[targetBuilding].Info?.m_buildingAI is ServicePointAI))
-                return;
-
-            bool pathOk = (data.m_flags & Vehicle.Flags.WaitingPath) != 0;
-            if (pathOk)
-            {
-                if (_okCount < 20 || _okCount % 500 == 0)
-                {
-                    Debug.Log("[PSS] CargoTruck → ServicePoint OK: veh=" + vehicleID
-                        + " target=" + targetBuilding
-                        + " path=" + data.m_path);
-                }
-                _okCount++;
-            }
-            else
-            {
-                Debug.Log("[PSS] CargoTruck → ServicePoint FAILED: veh=" + vehicleID
-                    + " target=" + targetBuilding
-                    + " flags=" + data.m_flags
-                    + " — pathfind failed, vehicle unspawned");
             }
         }
     }

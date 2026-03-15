@@ -48,7 +48,7 @@ namespace PedestrianStreetServices.Patches
         /// <summary>
         /// Returns true if the vehicle should be allowed to force-open a bollard.
         /// Called from the transpiled IL in place of the original Emergency2 flag check.
-        /// Service vehicles are only allowed through bollards outside of pedestrian zones.
+        /// Service vehicles are only allowed through bollards outside pedestrian zones.
         /// </summary>
         public static bool ShouldPassBollard(Vehicle.Flags flags, ushort vehicleID)
         {
