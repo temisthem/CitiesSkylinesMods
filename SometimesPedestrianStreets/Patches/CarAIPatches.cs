@@ -62,9 +62,7 @@ namespace SometimesPedestrianStreets.Patches
 
             // Don't force-open bollards at pedestrian zone boundaries — inside a zone
             // the service point system handles deliveries via the vanilla mechanism.
-            var districtManager = Singleton<DistrictManager>.instance;
-            var park = districtManager.GetPark(vehicle.GetLastFramePosition());
-            if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
+            if (DistrictUtils.IsInPedestrianZone(vehicle.GetLastFramePosition()))
                 return false;
 
             return true;

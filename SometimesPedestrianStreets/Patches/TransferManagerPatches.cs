@@ -20,10 +20,7 @@ namespace SometimesPedestrianStreets.Patches
     /// </summary>
     internal static class TransferManagerHelper
     {
-        internal static NetInfo TryStripServiceCategories(
-            ushort buildingID,
-            TransferManager.TransferReason material,
-            bool isOutgoing)
+        internal static NetInfo TryStripServiceCategories(ushort buildingID)
         {
             if (buildingID == 0)
                 return null;
@@ -34,9 +31,7 @@ namespace SometimesPedestrianStreets.Patches
             if (accessSeg == 0)
                 return null;
 
-            var dm = Singleton<DistrictManager>.instance;
-            var park = dm.GetPark(buffer[buildingID].m_position);
-            var inPedZone = park != 0 && dm.m_parks.m_buffer[park].IsPedestrianZone;
+            var inPedZone = DistrictUtils.IsInPedestrianZone(buffer[buildingID].m_position);
 
             var segInfo = Singleton<NetManager>.instance.m_segments.m_buffer[accessSeg].Info;
             if (!segInfo.IsPedestrianZoneRoad())
@@ -65,8 +60,7 @@ namespace SometimesPedestrianStreets.Patches
             ref TransferManager.TransferOffer offer,
             out NetInfo __state)
         {
-            __state = TransferManagerHelper.TryStripServiceCategories(
-                offer.Building, material, isOutgoing: true);
+            __state = TransferManagerHelper.TryStripServiceCategories(offer.Building);
         }
 
         [HarmonyFinalizer]
@@ -95,8 +89,7 @@ namespace SometimesPedestrianStreets.Patches
                 }
             }
 
-            __state = TransferManagerHelper.TryStripServiceCategories(
-                offer.Building, material, isOutgoing: false);
+            __state = TransferManagerHelper.TryStripServiceCategories(offer.Building);
         }
 
         [HarmonyFinalizer]

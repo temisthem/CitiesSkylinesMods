@@ -29,10 +29,8 @@ namespace SometimesPedestrianStreets.Patches
         public static long GetBollardMask(ushort nodeID)
         {
             var position = Singleton<NetManager>.instance.m_nodes.m_buffer[nodeID].m_position;
-            var districtManager = Singleton<DistrictManager>.instance;
-            var park = districtManager.GetPark(position);
 
-            if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
+            if (DistrictUtils.IsInPedestrianZone(position))
                 return (long)VehicleInfo.VehicleCategory.Emergency;
 
             return (long)(VehicleInfo.VehicleCategory.Emergency | ServiceVehicleCategories.Combined);
