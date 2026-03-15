@@ -33,4 +33,5 @@ ehthumbs.db
 Thumbs.db
 
 Build/
-/Src/Build
+.idea/
+*.DotSettings.user
