@@ -20,10 +20,7 @@ namespace SometimesPedestrianStreets.Patches
             if (!__result)
                 return;
 
-            var districtManager = Singleton<DistrictManager>.instance;
-            var park = districtManager.GetPark(data.m_position);
-
-            if (park != 0 && districtManager.m_parks.m_buffer[park].IsPedestrianZone)
+            if (DistrictUtils.IsInPedestrianZone(data.m_position))
                 return;
 
             __result = false;
