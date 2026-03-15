@@ -1,4 +1,4 @@
-namespace PedestrianStreetServices
+namespace SometimesPedestrianStreets
 {
     /// <summary>
     /// Shared constants defining which vehicle categories are considered

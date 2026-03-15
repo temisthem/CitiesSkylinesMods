@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using ColossalFramework;
 using UnityEngine;
 
-namespace PedestrianStreetServices
+namespace SometimesPedestrianStreets
 {
     public static class PrefabModifier
     {
@@ -71,7 +71,7 @@ namespace PedestrianStreetServices
                 }
             }
 
-            Debug.Log("[PedestrianStreetServices] Modified lane categories on " + modified + " pedestrian street prefabs.");
+            Debug.Log("[SometimesPedestrianStreets] Modified lane categories on " + modified + " pedestrian street prefabs.");
         }
 
         public static void RevertLaneModifications()
@@ -98,7 +98,7 @@ namespace PedestrianStreetServices
             }
 
             OriginalData.Clear();
-            Debug.Log("[PedestrianStreetServices] Reverted all lane category modifications.");
+            Debug.Log("[SometimesPedestrianStreets] Reverted all lane category modifications.");
         }
 
         private static void RecalculateVehicleCategories(NetInfo prefab)

@@ -3,7 +3,7 @@ using CitiesHarmony.API;
 using ICities;
 using UnityEngine;
 
-namespace PedestrianStreetServices
+namespace SometimesPedestrianStreets
 {
     public class LoadingExtension : LoadingExtensionBase
     {
@@ -17,7 +17,7 @@ namespace PedestrianStreetServices
             }
             catch (Exception e)
             {
-                Debug.LogError("[PedestrianStreetServices] Failed to apply prefab modifications: " + e);
+                Debug.LogError("[SometimesPedestrianStreets] Failed to apply prefab modifications: " + e);
             }
 
             try
@@ -29,7 +29,7 @@ namespace PedestrianStreetServices
             }
             catch (Exception e)
             {
-                Debug.LogError("[PedestrianStreetServices] Failed to apply Harmony patches: " + e);
+                Debug.LogError("[SometimesPedestrianStreets] Failed to apply Harmony patches: " + e);
             }
         }
 
@@ -44,7 +44,7 @@ namespace PedestrianStreetServices
             }
             catch (Exception e)
             {
-                Debug.LogError("[PedestrianStreetServices] Failed to remove Harmony patches: " + e);
+                Debug.LogError("[SometimesPedestrianStreets] Failed to remove Harmony patches: " + e);
             }
 
             try
@@ -53,7 +53,7 @@ namespace PedestrianStreetServices
             }
             catch (Exception e)
             {
-                Debug.LogError("[PedestrianStreetServices] Failed to revert prefab modifications: " + e);
+                Debug.LogError("[SometimesPedestrianStreets] Failed to revert prefab modifications: " + e);
             }
 
             base.OnLevelUnloading();

@@ -3,11 +3,11 @@ using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     public static class Patcher
     {
-        private const string HarmonyId = "com.pedestrianstreetservices";
+        private const string HarmonyId = "com.sometimespedestrianstreets";
         private static bool _patched;
 
         public static void PatchAll()
@@ -15,18 +15,18 @@ namespace PedestrianStreetServices.Patches
             if (_patched)
                 return;
 
-            Debug.Log("[PedestrianStreetServices] Applying Harmony patches...");
+            Debug.Log("[SometimesPedestrianStreets] Applying Harmony patches...");
 
             try
             {
                 var harmony = new Harmony(HarmonyId);
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
                 _patched = true;
-                Debug.Log("[PedestrianStreetServices] Harmony patches applied successfully.");
+                Debug.Log("[SometimesPedestrianStreets] Harmony patches applied successfully.");
             }
             catch (Exception e)
             {
-                Debug.LogError("[PedestrianStreetServices] Failed to apply Harmony patches: " + e);
+                Debug.LogError("[SometimesPedestrianStreets] Failed to apply Harmony patches: " + e);
             }
         }
 
@@ -35,13 +35,13 @@ namespace PedestrianStreetServices.Patches
             if (!_patched)
                 return;
 
-            Debug.Log("[PedestrianStreetServices] Removing Harmony patches...");
+            Debug.Log("[SometimesPedestrianStreets] Removing Harmony patches...");
 
             var harmony = new Harmony(HarmonyId);
             harmony.UnpatchAll(HarmonyId);
             _patched = false;
 
-            Debug.Log("[PedestrianStreetServices] Harmony patches removed.");
+            Debug.Log("[SometimesPedestrianStreets] Harmony patches removed.");
         }
     }
 }

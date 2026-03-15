@@ -7,8 +7,8 @@
     <ProjectGuid>{A3E7B2F1-8C4D-4F6A-9D1E-2B5C8F3A7E90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PedestrianStreetServices</RootNamespace>
-    <AssemblyName>PedestrianStreetServices</AssemblyName>
+    <RootNamespace>SometimesPedestrianStreets</RootNamespace>
+    <AssemblyName>SometimesPedestrianStreets</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,7 +67,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="DeployToMods" AfterTargets="Build">
     <PropertyGroup>
-      <ModFolder>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\PedestrianStreetServices</ModFolder>
+      <ModFolder>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\SometimesPedestrianStreets</ModFolder>
     </PropertyGroup>
     <MakeDir Directories="$(ModFolder)" Condition="!Exists('$(ModFolder)')" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModFolder)" />

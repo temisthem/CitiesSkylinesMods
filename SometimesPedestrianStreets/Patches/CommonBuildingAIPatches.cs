@@ -1,7 +1,7 @@
 using ColossalFramework;
 using HarmonyLib;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     /// <summary>
     /// Bypasses the service point proxy system for buildings that are on

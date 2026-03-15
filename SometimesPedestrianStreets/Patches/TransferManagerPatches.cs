@@ -2,7 +2,7 @@ using System.Reflection;
 using ColossalFramework;
 using HarmonyLib;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     /// <summary>
     /// Ensures vanilla service point routing still activates for buildings inside

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecisionEngineering", "PrecisionEngineering\PrecisionEngineering.csproj", "{C27473C2-C635-4945-BD62-3D96C9A5DA26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedestrianStreetServices", "PedestrianStreetServices\PedestrianStreetServices.csproj", "{A3E7B2F1-8C4D-4F6A-9D1E-2B5C8F3A7E90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SometimesPedestrianStreets", "SometimesPedestrianStreets\SometimesPedestrianStreets.csproj", "{A3E7B2F1-8C4D-4F6A-9D1E-2B5C8F3A7E90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

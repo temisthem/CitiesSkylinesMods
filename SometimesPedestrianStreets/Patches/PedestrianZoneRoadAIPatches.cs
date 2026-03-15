@@ -5,7 +5,7 @@ using ColossalFramework;
 using HarmonyLib;
 using UnityEngine;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     /// <summary>
     /// Expands the bollard entry/exit point configuration to recognize service
@@ -68,7 +68,7 @@ namespace PedestrianStreetServices.Patches
             if (!patched)
             {
                 Debug.LogWarning(
-                    "[PedestrianStreetServices] Could not find Emergency mask in PedestrianZoneRoadAI.UpdateBollards.");
+                    "[SometimesPedestrianStreets] Could not find Emergency mask in PedestrianZoneRoadAI.UpdateBollards.");
             }
         }
     }

@@ -1,11 +1,11 @@
 using CitiesHarmony.API;
 using ICities;
 
-namespace PedestrianStreetServices
+namespace SometimesPedestrianStreets
 {
     public class Mod : IUserMod
     {
-        public string Name => "Pedestrian Street Services";
+        public string Name => "Sometimes Pedestrian Streets";
 
         public string Description =>
             "Allows buildings to be placed on pedestrian streets without requiring a pedestrian zone, " +

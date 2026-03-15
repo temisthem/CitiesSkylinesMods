@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     /// <summary>
     /// Removes the "must be in a pedestrian zone" placement restriction

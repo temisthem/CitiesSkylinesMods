@@ -6,7 +6,7 @@ using ColossalFramework;
 using HarmonyLib;
 using UnityEngine;
 
-namespace PedestrianStreetServices.Patches
+namespace SometimesPedestrianStreets.Patches
 {
     /// <summary>
     /// Allows service vehicles to force-open bollards the same way emergency
@@ -106,7 +106,7 @@ namespace PedestrianStreetServices.Patches
             if (!patched)
             {
                 Debug.LogWarning(
-                    "[PedestrianStreetServices] Could not find Emergency2 bollard check in CarAI.CalculateSegmentPosition. " +
+                    "[SometimesPedestrianStreets] Could not find Emergency2 bollard check in CarAI.CalculateSegmentPosition. " +
                     "Service vehicles may not be able to force-open bollards.");
             }
 
