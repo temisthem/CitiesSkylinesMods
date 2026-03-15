@@ -20,31 +20,17 @@ namespace SometimesPedestrianStreets
                 Debug.LogError("[SometimesPedestrianStreets] Failed to apply prefab modifications: " + e);
             }
 
-            try
+            if (HarmonyHelper.IsHarmonyInstalled)
             {
-                if (HarmonyHelper.IsHarmonyInstalled)
-                {
-                    Patches.Patcher.PatchAll();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("[SometimesPedestrianStreets] Failed to apply Harmony patches: " + e);
+                Patches.Patcher.PatchAll();
             }
         }
 
         public override void OnLevelUnloading()
         {
-            try
+            if (HarmonyHelper.IsHarmonyInstalled)
             {
-                if (HarmonyHelper.IsHarmonyInstalled)
-                {
-                    Patches.Patcher.UnpatchAll();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("[SometimesPedestrianStreets] Failed to remove Harmony patches: " + e);
+                Patches.Patcher.UnpatchAll();
             }
 
             try
