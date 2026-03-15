@@ -12,12 +12,17 @@ namespace SometimesPedestrianStreets
             public VehicleInfo.VehicleCategoryPart2 Part2;
         }
 
+        public static bool IsApplied { get; private set; }
+
         // Stores original lane categories keyed by (prefab name, lane index)
         private static readonly Dictionary<string, OriginalLaneData[]> OriginalData =
             new Dictionary<string, OriginalLaneData[]>();
 
         public static void ApplyLaneModifications()
         {
+            if (IsApplied)
+                return;
+
             OriginalData.Clear();
 
             var count = PrefabCollection<NetInfo>.LoadedCount();
@@ -65,11 +70,15 @@ namespace SometimesPedestrianStreets
                 }
             }
 
+            IsApplied = true;
             Debug.Log("[SometimesPedestrianStreets] Modified lane categories on " + modified + " pedestrian street prefabs.");
         }
 
         public static void RevertLaneModifications()
         {
+            if (!IsApplied)
+                return;
+
             var count = PrefabCollection<NetInfo>.LoadedCount();
 
             for (uint i = 0; i < count; i++)
@@ -92,6 +101,7 @@ namespace SometimesPedestrianStreets
             }
 
             OriginalData.Clear();
+            IsApplied = false;
             Debug.Log("[SometimesPedestrianStreets] Reverted all lane category modifications.");
         }
 

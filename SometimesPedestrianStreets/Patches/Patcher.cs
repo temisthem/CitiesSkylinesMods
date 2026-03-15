@@ -8,11 +8,11 @@ namespace SometimesPedestrianStreets.Patches
     public static class Patcher
     {
         private const string HarmonyId = "temisthem.sometimespedestrianstreets";
-        private static bool _patched;
+        public static bool IsPatched { get; private set; }
 
         public static void PatchAll()
         {
-            if (_patched)
+            if (IsPatched)
                 return;
 
             Debug.Log("[SometimesPedestrianStreets] Applying Harmony patches...");
@@ -21,7 +21,7 @@ namespace SometimesPedestrianStreets.Patches
             {
                 var harmony = new Harmony(HarmonyId);
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
-                _patched = true;
+                IsPatched = true;
                 Debug.Log("[SometimesPedestrianStreets] Harmony patches applied successfully.");
             }
             catch (Exception e)
@@ -32,14 +32,14 @@ namespace SometimesPedestrianStreets.Patches
 
         public static void UnpatchAll()
         {
-            if (!_patched)
+            if (!IsPatched)
                 return;
 
             Debug.Log("[SometimesPedestrianStreets] Removing Harmony patches...");
 
             var harmony = new Harmony(HarmonyId);
             harmony.UnpatchAll(HarmonyId);
-            _patched = false;
+            IsPatched = false;
 
             Debug.Log("[SometimesPedestrianStreets] Harmony patches removed.");
         }
