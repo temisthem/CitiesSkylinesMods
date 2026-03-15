@@ -7,9 +7,9 @@ namespace SometimesPedestrianStreets
     {
         public static bool IsInPedestrianZone(Vector3 position)
         {
-            var dm = Singleton<DistrictManager>.instance;
-            var park = dm.GetPark(position);
-            return park != 0 && dm.m_parks.m_buffer[park].IsPedestrianZone;
+            var district = Singleton<DistrictManager>.instance;
+            var park = district.GetPark(position);
+            return park != 0 && district.m_parks.m_buffer[park].IsPedestrianZone;
         }
     }
 }

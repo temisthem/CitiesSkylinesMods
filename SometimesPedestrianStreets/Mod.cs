@@ -9,7 +9,7 @@ namespace SometimesPedestrianStreets
 
         public string Description =>
             "Allows buildings to be placed on pedestrian streets without requiring a pedestrian zone, " +
-            "and enables service vehicles (garbage, cargo, mail, etc.) to drive on pedestrian streets.";
+            "and enables service vehicles (garbage, cargo, mail, etc.) to drive on pedestrian streets if there is no pedestrian zone.";
 
         public void OnEnabled()
         {

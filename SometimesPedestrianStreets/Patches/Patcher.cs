@@ -7,7 +7,7 @@ namespace SometimesPedestrianStreets.Patches
 {
     public static class Patcher
     {
-        private const string HarmonyId = "com.sometimespedestrianstreets";
+        private const string HarmonyId = "temisthem.sometimespedestrianstreets";
         private static bool _patched;
 
         public static void PatchAll()
