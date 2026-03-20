@@ -5,13 +5,14 @@ namespace PrecisionEngineering.Data
     internal class DistanceMeasurement : Measurement
     {
         public DistanceMeasurement(float length, Vector3 position, bool isStraight, Vector3 startPosition,
-            Vector3 endPosition, MeasurementFlags flags)
+            Vector3 endPosition, MeasurementFlags flags, bool isLastControlPointSegment = false)
             : base(position, flags)
         {
             Length = length;
             IsStraight = isStraight;
             StartPosition = startPosition;
             EndPosition = endPosition;
+            IsLastControlPointSegment = isLastControlPointSegment;
         }
 
         /// <summary>
@@ -33,6 +34,11 @@ namespace PrecisionEngineering.Data
         /// End position of the distance measurement.
         /// </summary>
         public Vector3 EndPosition { get; }
+
+        /// <summary>
+        /// Whether this is the last control point segment (used for label positioning).
+        /// </summary>
+        public bool IsLastControlPointSegment { get; }
 
         /// <summary>
         /// Difference in height between the StartPosition and EndPosition.

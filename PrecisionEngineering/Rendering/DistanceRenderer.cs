@@ -9,9 +9,19 @@ namespace PrecisionEngineering.Rendering
         public const float Size = 1f;
         private const float DashSize = 3f;
         private const float HeightPadding = 20f;
+        private const float EndLabelOffsetFraction = 0.03f;
 
         public static Vector3 GetLabelWorldPosition(DistanceMeasurement distance)
         {
+            if (ModSettings.RoadLengthPosition == ModSettings.RoadLengthPositions.End
+                && distance.IsLastControlPointSegment)
+            {
+                var cameraDistance = Vector3.Distance(Camera.main.transform.position, distance.EndPosition);
+                var offset = cameraDistance * EndLabelOffsetFraction;
+                var direction = Vector3.Normalize(distance.EndPosition - distance.StartPosition);
+                return distance.EndPosition + direction * offset;
+            }
+
             return distance.Position;
         }
 

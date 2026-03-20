@@ -66,8 +66,9 @@ namespace PrecisionEngineering.Data
 
                 var dist = Vector3.Distance(p1.Flatten(), p2.Flatten());
                 var pos = Vector3Extensions.Average(p1, p2);
+                var isLast = i == netTool.ControlPointsCount;
 
-                measurements.Add(new DistanceMeasurement(dist, pos, true, p1, p2, MeasurementFlags.HideOverlay));
+                measurements.Add(new DistanceMeasurement(dist, pos, true, p1, p2, MeasurementFlags.HideOverlay, isLast));
             }
         }
 

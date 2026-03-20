@@ -30,6 +30,9 @@ namespace PrecisionEngineering
 
             group.AddDropdown("Measurement Unit", new [] {"Metric", "Imperial"}, (int)ModSettings.Unit,
                 OnMeasurementUnitChanged);
+
+            group.AddDropdown("Road Length Position", new [] {"Middle", "End"}, (int)ModSettings.RoadLengthPosition,
+                OnRoadLengthPositionChanged);
         }
 
         private void OnMeasurementUnitChanged(int sel)
@@ -40,6 +43,11 @@ namespace PrecisionEngineering
         private void OnFontSizeChanged(int val)
         {
             ModSettings.FontSize = val;
+        }
+
+        private void OnRoadLengthPositionChanged(int val)
+        {
+            ModSettings.RoadLengthPosition = (ModSettings.RoadLengthPositions)val;
         }
     }
 }

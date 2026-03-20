@@ -11,6 +11,12 @@ namespace PrecisionEngineering
             Imperial
         }
 
+        public enum RoadLengthPositions
+        {
+            Middle,
+            End
+        }
+
         public static int FontSize
         {
             get
@@ -58,7 +64,30 @@ namespace PrecisionEngineering
             }
         }
 
+        public static RoadLengthPositions RoadLengthPosition
+        {
+            get
+            {
+                if (!_roadLengthPosition.HasValue)
+                {
+                    _roadLengthPosition = (RoadLengthPositions)PlayerPrefs.GetInt("PE_ROAD_LENGTH_POSITION", 0);
+                }
+
+                return _roadLengthPosition.Value;
+            }
+            set
+            {
+                if (value == _roadLengthPosition)
+                {
+                    return;
+                }
+                PlayerPrefs.SetInt("PE_ROAD_LENGTH_POSITION", (int)value);
+                _roadLengthPosition = value;
+            }
+        }
+
         private static Units? _unit;
         private static int? _fontSize;
+        private static RoadLengthPositions? _roadLengthPosition;
     }
 }
