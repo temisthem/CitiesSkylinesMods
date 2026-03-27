@@ -105,6 +105,40 @@ namespace SometimesPedestrianStreets
             Debug.Log("[SometimesPedestrianStreets] Reverted all lane category modifications.");
         }
 
+        /// <summary>
+        /// Queues a road access recheck for every building whose access segment is a
+        /// pedestrian zone road. This forces the game to re-evaluate connectivity with
+        /// the expanded lane categories applied by <see cref="ApplyLaneModifications"/>,
+        /// clearing stale "cannot be reached" problems.
+        /// </summary>
+        public static void QueueRoadChecksForAffectedBuildings()
+        {
+            var buildingManager = Singleton<BuildingManager>.instance;
+            var netManager = Singleton<NetManager>.instance;
+            var buildings = buildingManager.m_buildings.m_buffer;
+            var segments = netManager.m_segments.m_buffer;
+            var queued = 0;
+
+            for (ushort i = 1; i < buildings.Length; i++)
+            {
+                if ((buildings[i].m_flags & Building.Flags.Created) == Building.Flags.None)
+                    continue;
+
+                var accessSeg = buildings[i].m_accessSegment;
+                if (accessSeg == 0)
+                    continue;
+
+                var segInfo = segments[accessSeg].Info;
+                if (segInfo != null && segInfo.IsPedestrianZoneRoad())
+                {
+                    buildingManager.RoadCheckNeeded(i);
+                    queued++;
+                }
+            }
+
+            Debug.Log("[SometimesPedestrianStreets] Queued road access rechecks for " + queued + " buildings on pedestrian streets.");
+        }
+
         private static void RecalculateVehicleCategories(NetInfo prefab)
         {
             prefab.m_vehicleCategories = VehicleInfo.VehicleCategory.None;

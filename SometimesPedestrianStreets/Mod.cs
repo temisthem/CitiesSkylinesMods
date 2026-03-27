@@ -39,6 +39,7 @@ namespace SometimesPedestrianStreets
             try
             {
                 PrefabModifier.ApplyLaneModifications();
+                PrefabModifier.QueueRoadChecksForAffectedBuildings();
             }
             catch (Exception e)
             {
